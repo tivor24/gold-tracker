@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>黄金投资估值计算</title>
+    <style>
+        body { font-family: "Microsoft YaHei", sans-serif; background: #f0f0f0; padding: 20px; }
+        .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        h2 { text-align: center; }
+        label { margin-top: 10px; display: block; }
+        input { width: 100%; padding: 8px; font-size: 16px; margin-top: 5px; }
+        .result { margin-top: 20px; font-size: 18px; color: #333; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>黄金投资估值计算</h2>
+        <label>投入总金额（元）：
+            <input type="number" id="totalInvest" value="50000">
+        </label>
+        <label>持有克数（g）：
+            <input type="number" id="gramsHeld" value="60">
+        </label>
+        <label>当前金价（元/克）：
+            <input type="number" id="currentPrice" value="790">
+        </label>
+        <div class="result" id="output"></div>
+    </div>
+    <script>
+        function calculate() {
+            const invest = parseFloat(document.getElementById("totalInvest").value);
+            const grams = parseFloat(document.getElementById("gramsHeld").value);
+            const price = parseFloat(document.getElementById("currentPrice").value);
+            if (!isNaN(invest) && !isNaN(grams) && !isNaN(price)) {
+                const value = grams * price;
+                const profit = value - invest;
+                document.getElementById("output").innerHTML =
+                    "当前估值：" + value.toFixed(2) + " 元<br>盈亏：" + profit.toFixed(2) + " 元";
+            }
+        }
+        document.querySelectorAll("input").forEach(input => input.addEventListener("input", calculate));
+        calculate();
+    </script>
+</body>
+</html>
